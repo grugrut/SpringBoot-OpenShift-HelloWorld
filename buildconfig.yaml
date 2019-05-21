@@ -1,0 +1,23 @@
+apiVersion: build.openshift.io/v1                                                               
+kind: BuildConfig                                                                               
+metadata:                                                                                       
+  name: builder                                                                                 
+  namespace: s2i-springboot-example                                                             
+spec:                                                                                           
+  failedBuildsHistoryLimit: 5                                                                   
+  nodeSelector: null                                                                            
+  output:                                                                                       
+    to:                                                                                         
+      kind: ImageStreamTag                                                                      
+      name: builder:latest                                                                      
+  runPolicy: Serial                                                                             
+  source:                                                                                       
+    binary: {}                                                                                  
+    type: Binary                                                                                
+  strategy:                                                                                     
+    sourceStrategy:                                                                             
+      from:                                                                                     
+        kind: ImageStreamTag                                                                    
+        name: s2i-java:latest                                                                   
+    type: Source                                                                                
+  successfulBuildsHistoryLimit: 5                                                               
